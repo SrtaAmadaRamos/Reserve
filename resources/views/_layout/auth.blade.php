@@ -13,6 +13,13 @@
         <link href="{{ asset('css/signin.css') }}" type="text/css" rel="stylesheet">
         <!-- Styles -->
 
+        <style>
+            .error-login ul {
+                list-style: none;
+                padding-left: 0;
+                margin: 0;
+            }
+        </style>
     </head>
 
     <body class="text-center">

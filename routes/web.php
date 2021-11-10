@@ -18,7 +18,9 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 
 Route::prefix('/auth')->group(function(Router $router) {
     $router->get('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+    $router->post('/login', [\App\Http\Controllers\AuthController::class, 'loginPost']);
     $router->get('/registrar', [\App\Http\Controllers\AuthController::class, 'registrar']);
+    $router->get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 });
 
 

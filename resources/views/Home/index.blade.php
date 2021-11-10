@@ -5,7 +5,7 @@
         <h1 class="h2">Reservas de sala</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Adicionar reserva</button>
+                <button type="button" class="btn btn-sm btn-outline-info">Adicionar reserva</button>
             </div>
         </div>
     </div>
