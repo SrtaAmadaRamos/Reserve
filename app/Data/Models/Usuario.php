@@ -2,23 +2,16 @@
 
 namespace App\Data\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 /**
+ * @property integer $id
+ * @property string $nome
  * @property string $email
+ * @property string $senha
  */
 class Usuario extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
-    public int $id;
-    public string $nome;
-    public string $email;
-    public string $senha;
-
     /**
      * The attributes that are mass assignable.
      *

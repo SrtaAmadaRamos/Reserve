@@ -23,4 +23,8 @@ Route::prefix('/auth')->group(function(Router $router) {
     $router->get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 });
 
-
+Route::prefix('/usuarios')->group(function(Router $router) {
+    $router->get('/', [\App\Http\Controllers\UsuarioController::class, 'index'])->name('usuarios.listar');
+    $router->post('/cadastrar', [\App\Http\Controllers\UsuarioController::class, 'cadastrarUsuario'])->name('usuarios.cadastrar');
+    $router->get('/cadastrar', [\App\Http\Controllers\UsuarioController::class, 'cadastrarUsuarioPost']);
+});
