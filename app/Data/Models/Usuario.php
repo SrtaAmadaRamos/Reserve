@@ -9,9 +9,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $nome
  * @property string $email
  * @property string $senha
+ * @property int $tipo
+ * @property string $identificacao
  */
 class Usuario extends Authenticatable
 {
+    const CREATED_AT = 'criado_em';
+    const UPDATED_AT = 'atualizado_em';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,8 +24,10 @@ class Usuario extends Authenticatable
      */
     protected $fillable = [
         'nome',
+        'identificacao',
         'email',
         'senha',
+        'tipo'
     ];
 
     /**

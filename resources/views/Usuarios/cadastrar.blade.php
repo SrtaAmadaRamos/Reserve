@@ -13,25 +13,34 @@
                 <div class="row">
                     <div class="mb-3 col-sm-6">
                         <label for="nome" class="form-label">Nome</label>
-                        <input name="nome" type="email" class="form-control" id="nome" placeholder="Nome Sobrenome">
+                        <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome Sobrenome" required>
+                        @foreach($errors->get('nome') as $erro)
+                            <span class="text-danger">{{$erro}}</span>
+                        @endforeach
                     </div>
                     <div class="mb-3 col-sm-6">
                         <label for="identificacao" class="form-label">Identificação</label>
-                        <input name="identificacao" type="text" class="form-control" id="identificacao" placeholder="123456789">
+                        <input name="identificacao" type="text" class="form-control" id="identificacao" placeholder="123456789" required>
+                        @foreach($errors->get('identificacao') as $erro)
+                            <span class="text-danger">{{$erro}}</span>
+                        @endforeach
                     </div>
                     <div class="mb-3 col-sm-6">
                         <label for="email" class="form-label">Email</label>
-                        <input name="email" type="email" class="form-control" id="email" placeholder="email@gmail.com" />
+                        <input name="email" type="email" class="form-control" id="email" placeholder="email@gmail.com" required />
+                        @foreach($errors->get('email') as $erro)
+                            <span class="text-danger">{{$erro}}</span>
+                        @endforeach
                     </div>
                     <div class="mb-3 col-sm-6">
                         <label for="tipo" class="form-label">Tipo</label>
-                        <select name="tipo" id="tipo" class="form-select">
-                            <option value="1">Responsável de Sala</option>
+                        <select name="tipo" id="tipo" class="form-select" required>
                             <option value="2">Usuário</option>
+                            <option value="1">Administrador</option>
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
     </div>
 </div>

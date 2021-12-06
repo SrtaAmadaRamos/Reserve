@@ -52,6 +52,7 @@ class AuthController extends Controller
         $request->session()->put('id', $usuario->id);
         $request->session()->put('nome', $usuario->nome);
         $request->session()->put('email', $usuario->email);
+        $request->session()->put('tipo', $usuario->tipo);
 
         return redirect('/');
     }

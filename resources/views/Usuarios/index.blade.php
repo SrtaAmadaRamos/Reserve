@@ -1,6 +1,12 @@
 @extends('_layout.default')
 
 @section('content')
+    @if (session('mensagem'))
+        <div class="alert alert-success alert-dismissible fade show mt-3">
+            {{ session('mensagem') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Usuários</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -13,22 +19,32 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th scope="col">id</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Identificação</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Ações</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col" class="text-center">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($usuarios as $usuario)
                 <tr>
                     <td>{{$usuario->id}}</td>
+                    <td>{{$usuario->identificacao}}</td>
                     <td>{{$usuario->nome}}</td>
                     <td>{{$usuario->email}}</td>
-                    <td>
-                        <button class="btn btn-sm btn-warning">
+                    <td>{{$usuario->tipo == 1 ? 'Administrado' : 'Usuário'}}</td>
+                    <td class="text-center d-flex justify-content-center">
+                        <a class="btn btn-sm btn-warning" href="{{route('usuarios.editar', ['id' => $usuario->id])}}">
                             Editar
-                        </button>
+                        </a>
+                        <form method="post" action="{{route('usuarios.excluir', ['id' => $usuario->id])}}" onsubmit="if(!confirm('Realmente deseja apagar o usuário {{$usuario->nome}}?')) return false;">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-danger" >
+                                Excluir
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

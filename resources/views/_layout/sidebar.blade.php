@@ -13,19 +13,14 @@
                     Salas
                 </a>
             </li>
-            <li class="nav-item">
-
-                <a class="nav-link" href="{{route('usuarios.listar')}}">
-                    <span data-feather="shopping-cart"></span>
-                    Usuário
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="layers"></span>
-                    Integrations
-                </a>
-            </li>
+            @if(request()->session()->get('tipo') == 1)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('usuarios.listar')}}">
+                        <span data-feather="shopping-cart"></span>
+                        Usuário
+                    </a>
+                </li>
+            @endif
         </ul>
 
     </div>

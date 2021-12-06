@@ -14,17 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth']);
 
 Route::prefix('/auth')->group(function(Router $router) {
-    $router->get('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+    $router->get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
     $router->post('/login', [\App\Http\Controllers\AuthController::class, 'loginPost']);
     $router->get('/registrar', [\App\Http\Controllers\AuthController::class, 'registrar']);
     $router->get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 });
 
-Route::prefix('/usuarios')->group(function(Router $router) {
+Route::prefix('/usuarios')->middleware(['auth', 'authorization'])->group(function(Router $router) {
     $router->get('/', [\App\Http\Controllers\UsuarioController::class, 'index'])->name('usuarios.listar');
-    $router->post('/cadastrar', [\App\Http\Controllers\UsuarioController::class, 'cadastrarUsuario'])->name('usuarios.cadastrar');
-    $router->get('/cadastrar', [\App\Http\Controllers\UsuarioController::class, 'cadastrarUsuarioPost']);
+    $router->get('/cadastrar', [\App\Http\Controllers\UsuarioController::class, 'cadastrarUsuario'])->name('usuarios.cadastrar');
+    $router->post('/cadastrar', [\App\Http\Controllers\UsuarioController::class, 'cadastrarUsuarioPost']);
+    $router->get('/editar/{id}', [\App\Http\Controllers\UsuarioController::class, 'editarUsuario'])->name('usuarios.editar');
+    $router->post('/editar/{id}', [\App\Http\Controllers\UsuarioController::class, 'editarUsuarioPost']);
+    $router->post('/excluir/{id}', [\App\Http\Controllers\UsuarioController::class, 'excluir'])->name('usuarios.excluir');
 });
