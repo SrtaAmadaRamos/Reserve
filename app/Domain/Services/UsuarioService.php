@@ -22,13 +22,18 @@ class UsuarioService implements IUsuarioService
         return $usuario;
     }
 
-    public function cadastrar(array $dados): ?Usuario
+    public function cadastrar(array $dados, bool $senhaPadrao = true, bool $grupoPadrao = false): ?Usuario
     {
-        $dados['senha'] = Hash::make($dados['identificacao']);
+        $dados['senha'] = $senhaPadrao
+                                ? Hash::make($dados['identificacao'])
+                                : Hash::make($dados['senha']);
 
-        $usuario = $this->model->create($dados);
+        if ($grupoPadrao) unset($dados['tipo']);
 
-        return $usuario;
+        if(!$usuario = $this->model->create($dados))
+            return null;
+
+        return $this->model->find($usuario->id);
     }
 
     public function editar(int $id, array $dados): bool

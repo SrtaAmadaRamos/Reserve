@@ -13,9 +13,9 @@
                 <input type="hidden" name="id" value="{{$sala->id}}">
                 <div class="row">
                     <div class="mb-3 col-sm-6">
-                        <label for="name" class="form-label">Nome</label>
-                        <input name="name" type="text" class="form-control" id="name" value="{{$sala->name}}" placeholder="Nome da sala" required>
-                        @foreach($errors->get('name') as $erro)
+                        <label for="nome" class="form-label">Nome</label>
+                        <input name="nome" type="text" class="form-control" id="nome" value="{{$sala->nome}}" placeholder="Nome da sala" required>
+                        @foreach($errors->get('nome') as $erro)
                             <span class="text-danger">{{$erro}}</span>
                         @endforeach
                     </div>
@@ -30,7 +30,7 @@
                         <label for="bloco_id" class="form-label">Bloco</label>
                         <select name="bloco_id" id="bloco_id" class="form-select" required>
                             @foreach($blocos as $bloco)
-                                <option value="{{$bloco->id}}" {{$sala->bloco_id == $bloco->id ? 'selected' : ''}} >{{$bloco->name}}</option>
+                                <option value="{{$bloco->id}}" {{$sala->bloco_id == $bloco->id ? 'selected' : ''}} >{{$bloco->nome}}</option>
                             @endforeach
                         </select>
                         @foreach($errors->get('bloco_id') as $erro)

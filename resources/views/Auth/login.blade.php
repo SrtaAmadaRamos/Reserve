@@ -26,7 +26,8 @@
                 <label for="floatingPassword">Senha</label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+            <button class="w-100 btn btn-lg btn-primary mb-3 mt-3" type="submit">Entrar</button>
+            <a href="{{route('registrar')}}">Não tem cadastro? Cadastre-se aqui!</a>
             <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
         </form>
     </main>

@@ -13,16 +13,14 @@ class CreateTableReserva extends Migration
      */
     public function up()
     {
-        Schema::create('reserva', function (Blueprint $table) {
+        Schema::create('reservas', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('bloco_id')->unsigned();
             $table->bigInteger('sala_id')->unsigned();
             $table->bigInteger('usuario_id')->unsigned();
             $table->time('horarioEntrada');
             $table->time('horarioSaida');
             $table->date('data');
-            $table->foreign('bloco_id')->on('blocos')->references('id');
-            $table->foreign('sala_id')->on('sala')->references('id');
+            $table->foreign('sala_id')->on('salas')->references('id');
             $table->foreign('usuario_id')->on('usuarios')->references('id');
             $table->timestamps();
         });
@@ -35,6 +33,6 @@ class CreateTableReserva extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reserva');
+        Schema::dropIfExists('reservas');
     }
 }

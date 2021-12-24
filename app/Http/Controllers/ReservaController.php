@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Data\Models\Reserva;
+use App\Data\Models\Sala;
 use App\Domain\Interfaces\Services\IReservaService;
 use App\Http\Requests\Reserva\EditarRequest;
 use App\Http\Requests\Reserva\CadastrarRequest;
+use App\Http\Requests\Reservas\CriarReservaRequest;
+use InvalidArgumentException;
+use Symfony\Component\Console\Input\Input;
 
 class ReservaController extends Controller
 {
@@ -16,53 +20,31 @@ class ReservaController extends Controller
         $this->reservaService = $reservaService;
     }
 
-    public function index()
+    public function reservar()
     {
-        $reserva = Reserva::query()->paginate(15);
-        return view('reserva.index', compact('reserva'));
+        $salas = Sala::with(['responsavel', 'bloco'])->get();
+
+        $salas = $salas->sort(fn ($sala1, $sala2) => $sala1->bloco->nome > $sala2->bloco->nome);
+
+        return view('reservas.reservar', compact('salas'));
     }
 
-    public function cadastrarReserva()
+    public function reservarPost(CriarReservaRequest $request)
     {
-        return view('reserva.cadastrar');
-    }
+        $dados = $request->all((new Reserva)->getFillable());
+        try {
 
-    public function cadastrarReservaPost(CadastrarRequest $request)
-    {
-        $reserva = $this->reservaService->cadastrar($request->all());
+            if ($this->reservaService->cadastrar($dados)) {
+                return redirect('/')->with('mensagem', 'Reserva criada com sucesso!');
+            }
 
-        if($reserva != null) {
-            return redirect('/reserva')->with('mensagem', 'reserva cadastrado com sucesso!');
+            return back()->withInput()->withErrors([
+                'comum' => 'Ocorreu um erro ao registrar reserva.',
+            ]);
+        } catch (InvalidArgumentException $exception) {
+            return back()->withInput()->withErrors([
+                'comum' => $exception->getMessage(),
+            ]);
         }
-
-        return back();
-    }
-
-    public function editarReserva(int $id)
-    {
-        $reserva = Reserva::findOrFail($id);
-        return view('reserva.editar', compact('reserva'));
-    }
-
-    public function editarReservaPost(int $id, EditarRequest $request)
-    {
-        Reserva::findOrFail($id);
-
-        if($this->reservaService->editar($id, $request->except(['_token', 'id']))) {
-            return redirect('/reserva')->with('mensagem', 'Reserva editada com sucesso!');
-        }
-
-        return back();
-    }
-
-    public function excluir(int $id)
-    {
-        Reserva::findOrFail($id);
-
-        if($this->reservaService->excluir($id)) {
-            return redirect('/reserva')->with('mensagem', 'Reserva excluída com sucesso!');
-        }
-
-        return back();
     }
 }

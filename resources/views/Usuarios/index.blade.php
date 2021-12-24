@@ -1,12 +1,6 @@
 @extends('_layout.default')
 
 @section('content')
-    @if (session('mensagem'))
-        <div class="alert alert-success alert-dismissible fade show mt-3">
-            {{ session('mensagem') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Usuários</h1>
         <div class="btn-toolbar mb-2 mb-md-0">

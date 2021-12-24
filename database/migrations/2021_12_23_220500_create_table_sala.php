@@ -13,9 +13,9 @@ class CreateTableSala extends Migration
      */
     public function up()
     {
-        Schema::create('sala', function (Blueprint $table) {
+        Schema::create('salas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nome');
             $table->integer('numero');
             $table->bigInteger('responsavel_id')->unsigned();
             $table->bigInteger('bloco_id')->unsigned();
@@ -33,6 +33,6 @@ class CreateTableSala extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sala');
+        Schema::dropIfExists('salas');
     }
 }

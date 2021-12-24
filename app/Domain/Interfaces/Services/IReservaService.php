@@ -3,11 +3,10 @@
 namespace App\Domain\Interfaces\Services;
 
 use App\Data\Models\Reserva;
+use Illuminate\Database\Eloquent\Collection;
 
 interface IReservaService
 {
-    function obterReserva(int $id): ?Reserva;
+    function obterReservasParaHome(int $limit): Collection;
     function cadastrar(array $dados): ?Reserva;
-    function editar(int $id, array $dados): bool;
-    function excluir(int $id): bool;
 }

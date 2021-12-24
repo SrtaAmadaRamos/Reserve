@@ -12,9 +12,9 @@
                 @csrf
                 <div class="row">
                     <div class="mb-3 col-sm-4">
-                        <label for="name" class="form-label">Nome</label>
-                        <input name="name" type="text" class="form-control" id="name" placeholder="Nome do bloco" required>
-                        @foreach($errors->get('name') as $erro)
+                        <label for="nome" class="form-label">Nome</label>
+                        <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome do bloco" required>
+                        @foreach($errors->get('nome') as $erro)
                             <span class="text-danger">{{$erro}}</span>
                         @endforeach
                     </div>

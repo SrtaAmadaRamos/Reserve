@@ -3,18 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Data\Models\Usuario;
+use App\Domain\Interfaces\Services\IUsuarioService;
+use App\Http\Requests\Auth\RegistrarRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Ramsey\Collection\Collection;
+use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    public function __construct()
+    private IUsuarioService $usuarioService;
+
+    public function __construct(IUsuarioService $usuarioService)
     {
+        $this->usuarioService = $usuarioService;
     }
 
-    public function login()
+    public function login(): View | RedirectResponse
     {
         if($this->autenticado())
             return redirect('/');
@@ -22,7 +27,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function loginPost(Request $request)
+    public function loginPost(Request $request): RedirectResponse
     {
         $request->validate([
             'email' => 'required|email',
@@ -48,23 +53,44 @@ class AuthController extends Controller
             ]);
         }
 
-        $request->session()->put('autenticado', true);
-        $request->session()->put('id', $usuario->id);
-        $request->session()->put('nome', $usuario->nome);
-        $request->session()->put('email', $usuario->email);
-        $request->session()->put('tipo', $usuario->tipo);
+        $this->setAuth($usuario);
 
         return redirect('/');
     }
 
-    //public function registrar()
-    //{
-    //    return view('auth.registrar');
-    //}
+    public function registrar(): View
+    {
+        return view('auth.registrar');
+    }
 
-    public function logout()
+    public function registrarPost(RegistrarRequest $request)
+    {
+        $dados = $request->all((new Usuario)->getFillable());
+        $usuario = $this->usuarioService->cadastrar($dados, false, true);
+
+        if($usuario == null) {
+            return back()->withInput()->withErrors([
+                '' => 'Ocorreu um erro ao registrar.',
+            ]);
+        }
+
+        $this->setAuth($usuario);
+
+        return redirect('/');
+    }
+
+    public function logout(): RedirectResponse
     {
         request()->session()->invalidate();
         return redirect('/auth/login');
+    }
+
+    private function setAuth(Usuario $usuario): void
+    {
+        request()->session()->put('autenticado', true);
+        request()->session()->put('id', $usuario->id);
+        request()->session()->put('nome', $usuario->nome);
+        request()->session()->put('email', $usuario->email);
+        request()->session()->put('tipo', $usuario->tipo);
     }
 }

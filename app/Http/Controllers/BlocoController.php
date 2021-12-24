@@ -47,8 +47,8 @@ class BlocoController extends Controller
     public function editarBlocoPost(int $id, EditarRequest $request)
     {
         Bloco::findOrFail($id);
-
-        if($this->blocoService->editar($id, $request->except(['_token', 'id']))) {
+        $dados = $request->all((new Bloco)->getFillable());
+        if($this->blocoService->editar($id, $dados)) {
             return redirect('/blocos')->with('mensagem', 'Bloco editado com sucesso!');
         }
 

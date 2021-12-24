@@ -14,7 +14,7 @@ class CadastrarRequest extends FormRequest
     public function authorize()
     {
         return [
-            'name' => 'required|unique:sala',
+            'nome' => 'required|unique:sala',
             'numero' => 'required|unique:sala|integer',
         ];
     }
@@ -27,8 +27,8 @@ class CadastrarRequest extends FormRequest
     public function rules()
     {
         return [
-            'name.required' => 'O nome é obrigatório.',
-            'name.unique' => 'O nome já está em uso.',
+            'nome.required' => 'O nome é obrigatório.',
+            'nome.unique' => 'O nome já está em uso.',
             'numero.required' => 'O número é obrigatório.',
             'numero.unique' => 'O número informado já está em uso.',
             'numero.integer' => 'O valor para número deve ser um inteiro.',

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property integer $id
- * @property string $name
+ * @property string $nome
  * @property int $numero
  * @property int $responsavel_id
  * @property int $bloco_id
@@ -16,10 +16,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Sala extends Model
 {
-    protected $table = "sala";
-
     protected $fillable = [
-        'name',
+        'nome',
         'numero',
         'responsavel_id',
         'bloco_id',
