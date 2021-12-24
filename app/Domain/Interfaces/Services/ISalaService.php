@@ -2,12 +2,12 @@
 
 namespace App\Domain\Interfaces\Services;
 
-use App\Data\Models\Bloco;
+use App\Data\Models\Sala;
 
-interface IBlocoService
+interface ISalaService
 {
-    function obterBloco(int $id): ?Bloco;
-    function cadastrar(array $dados): ?Bloco;
+    function obterSala(int $id): ?Sala;
+    function cadastrar(array $dados): ?Sala;
     function editar(int $id, array $dados): bool;
     function excluir(int $id): bool;
 }
