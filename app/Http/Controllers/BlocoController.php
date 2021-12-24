@@ -39,7 +39,7 @@ class BlocoController extends Controller
     public function editarBloco(int $id)
     {
         $usuario = Bloco::findOrFail($id);
-        return view('blocos.editar', compact('bloco'));
+        return view('blocos.editar', compact('usuario'));
     }
 
     public function editarBlocoPost(int $id, EditarRequest $request)

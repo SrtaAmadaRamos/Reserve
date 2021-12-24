@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console;
+namespace App\Core\Loggers;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -57,4 +57,3 @@ class LoggerConsole extends Command
         $this->error(json_encode($string, JSON_PRETTY_PRINT), $verbosity);
     }
 }
-

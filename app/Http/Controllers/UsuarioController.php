@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Console\LoggerConsole;
 use App\Data\Models\Usuario;
 use App\Domain\Interfaces\Services\IUsuarioService;
 use App\Http\Requests\Usuarios\CadastrarRequest;
@@ -43,7 +42,7 @@ class UsuarioController extends Controller
 
     public function editarUsuario(int $id)
     {
-        $usuario = Usuario::findOrFail($id);
+        $usuario = $this->usuarioService->obterUsuario($id);
         return view('usuarios.editar', compact('usuario'));
     }
 
