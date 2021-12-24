@@ -2,6 +2,8 @@
 
 namespace App\Data\Models;
 
+use Illuminate\Database\Eloquent\Model;
+
 /**
  * @property integer $id
  * @property string $nome
@@ -10,8 +12,10 @@ namespace App\Data\Models;
  * @property int $bloco_id
  */
 
-class Sala
+class Sala extends Model
 {
+    protected $table = "sala";
+
     protected $fillable = [
         'nome',
         'numero',

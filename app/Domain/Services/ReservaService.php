@@ -2,24 +2,24 @@
 
 namespace App\Domain\Services;
 
-use App\Data\Models\Bloco;
-use App\Domain\Interfaces\Services\IBlocoService;
-
-class BlocoService implements IBlocoService
+use App\Data\Models\Reserva;
+use App\Domain\Interfaces\Services\IReservaService;
+class ReservaService implements IReservaService
 {
-    private Bloco $model;
 
-    public function __construct(Bloco $model)
+    private Reserva $model;
+
+    public function __construct(Reserva $model)
     {
         $this->model = $model;
     }
 
-    public function obterBloco(int $id): ?Bloco
+    public function obterReserva(int $id): ?Reserva
     {
-        return Bloco::findOrFail($id);
+        return Reserva::findOrFail($id);
     }
 
-    public function cadastrar(array $dados): ?Bloco
+    public function cadastrar(array $dados): ?Reserva
     {
         return $this->model->create($dados);
     }

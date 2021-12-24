@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Data\Models\Bloco;
 use App\Domain\Interfaces\Services\IBlocoService;
+use App\Http\Requests\Blocos\CadastrarRequest;
+use App\Http\Requests\Blocos\EditarRequest;
 
 class BlocoController extends Controller
 {
@@ -16,8 +18,8 @@ class BlocoController extends Controller
 
     public function index()
     {
-        $usuarios = Bloco::query()->paginate(15);
-        return view('usuarios.index', compact('blocos'));
+        $blocos = Bloco::query()->paginate(15);
+        return view('blocos.index', compact('blocos'));
     }
 
     public function cadastrarBloco()
@@ -27,9 +29,9 @@ class BlocoController extends Controller
 
     public function cadastrarBlocoPost(CadastrarRequest $request)
     {
-        $usuario = $this->blocoService->cadastrar($request->all());
+        $bloco = $this->blocoService->cadastrar($request->all());
 
-        if($usuario != null) {
+        if($bloco != null) {
             return redirect('/blocos')->with('mensagem', 'Bloco cadastrado com sucesso!');
         }
 
@@ -38,8 +40,8 @@ class BlocoController extends Controller
 
     public function editarBloco(int $id)
     {
-        $usuario = Bloco::findOrFail($id);
-        return view('blocos.editar', compact('usuario'));
+        $bloco = Bloco::findOrFail($id);
+        return view('blocos.editar', compact('bloco'));
     }
 
     public function editarBlocoPost(int $id, EditarRequest $request)
@@ -63,5 +65,4 @@ class BlocoController extends Controller
 
         return back();
     }
-
 }

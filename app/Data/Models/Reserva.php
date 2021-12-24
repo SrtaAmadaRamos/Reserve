@@ -16,6 +16,8 @@ use DateTime;
 
 class Reserva
 {
+    protected $table = "reserva";
+
     protected $fillable = [
         'responsavel_id',
         'bloco_id',
@@ -25,4 +27,7 @@ class Reserva
         'horarioSaida',
 
     ];
+
+
+
 }

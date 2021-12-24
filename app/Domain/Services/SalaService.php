@@ -2,24 +2,25 @@
 
 namespace App\Domain\Services;
 
-use App\Data\Models\Bloco;
-use App\Domain\Interfaces\Services\IBlocoService;
+use App\Data\Models\Sala;
+use App\Domain\Interfaces\Services\ISalaService;
 
-class BlocoService implements IBlocoService
+class SalaService implements ISalaService
 {
-    private Bloco $model;
 
-    public function __construct(Bloco $model)
+    private Sala $model;
+
+    public function __construct(Sala $model)
     {
         $this->model = $model;
     }
 
-    public function obterBloco(int $id): ?Bloco
+    public function obterSala(int $id): ?Sala
     {
-        return Bloco::findOrFail($id);
+        return Sala::findOrFail($id);
     }
 
-    public function cadastrar(array $dados): ?Bloco
+    public function cadastrar(array $dados): ?Sala
     {
         return $this->model->create($dados);
     }
