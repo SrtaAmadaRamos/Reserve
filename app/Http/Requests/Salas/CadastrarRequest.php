@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Sala;
+namespace App\Http\Requests\Salas;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,7 +14,7 @@ class CadastrarRequest extends FormRequest
     public function authorize()
     {
         return [
-            'nome' => 'required|unique:sala',
+            'name' => 'required|unique:sala',
             'numero' => 'required|unique:sala|integer',
         ];
     }
@@ -27,8 +27,8 @@ class CadastrarRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome.required' => 'O nome é obrigatório.',
-            'nome.unique' => 'O nome já está em uso.',
+            'name.required' => 'O nome é obrigatório.',
+            'name.unique' => 'O nome já está em uso.',
             'numero.required' => 'O número é obrigatório.',
             'numero.unique' => 'O número informado já está em uso.',
             'numero.integer' => 'O valor para número deve ser um inteiro.',

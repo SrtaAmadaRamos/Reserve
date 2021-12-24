@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Sala;
+namespace App\Http\Requests\Salas;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -15,7 +15,7 @@ class EditarRequest extends FormRequest
     public function authorize()
     {
         return [
-            'nome' => [
+            'name' => [
                 'required',
                 Rule::unique('sala')->ignore($this->id)
             ],
@@ -34,8 +34,8 @@ class EditarRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome.required' => 'O nome é obrigatório.',
-            'nome.unique' => 'O nome já está em uso.',
+            'name.required' => 'O nome é obrigatório.',
+            'name.unique' => 'O nome já está em uso.',
             'numero.required' => 'O número é obrigatório.',
             'numero.unique' => 'O número informado já está em uso.',
             'numero.integer' => 'O valor para número deve ser um inteiro.',

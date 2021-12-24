@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property integer $id
- * @property string $nome
+ * @property string $name
  * @property string $numero
  * @property string $coordenador
  */
@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bloco extends Model
 {
     protected $fillable = [
-        'nome',
+        'name',
         'numero',
         'coordenador',
     ];

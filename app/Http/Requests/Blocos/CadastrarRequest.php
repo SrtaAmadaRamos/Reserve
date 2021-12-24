@@ -14,7 +14,7 @@ class CadastrarRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'required|unique:blocos',
+            'name' => 'required|unique:blocos',
             'numero' => 'required|unique:blocos|integer',
             'coordenador' => 'required|max:255'
         ];
@@ -26,8 +26,8 @@ class CadastrarRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'nome.required' => 'O nome é obrigatório.',
-            'nome.unique' => 'O nome já está em uso.',
+            'name.required' => 'O nome é obrigatório.',
+            'name.unique' => 'O nome já está em uso.',
             'numero.required' => 'O número é obrigatório.',
             'numero.unique' => 'O número informado já está em uso.',
             'numero.integer' => 'O valor para número deve ser um inteiro.',

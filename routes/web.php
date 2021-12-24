@@ -31,3 +31,21 @@ Route::prefix('/usuarios')->middleware(['auth', 'authorization'])->group(functio
     $router->post('/editar/{id}', [\App\Http\Controllers\UsuarioController::class, 'editarUsuarioPost']);
     $router->post('/excluir/{id}', [\App\Http\Controllers\UsuarioController::class, 'excluir'])->name('usuarios.excluir');
 });
+
+Route::prefix('/blocos')->middleware(['auth', 'authorization'])->group(function(Router $router) {
+    $router->get('/', [\App\Http\Controllers\BlocoController::class, 'index'])->name('blocos.listar');
+    $router->get('/cadastrar', [\App\Http\Controllers\BlocoController::class, 'cadastrarBloco'])->name('blocos.cadastrar');
+    $router->post('/cadastrar', [\App\Http\Controllers\BlocoController::class, 'cadastrarBlocoPost']);
+    $router->get('/editar/{id}', [\App\Http\Controllers\BlocoController::class, 'editarBloco'])->name('blocos.editar');
+    $router->post('/editar/{id}', [\App\Http\Controllers\BlocoController::class, 'editarBlocoPost']);
+    $router->post('/excluir/{id}', [\App\Http\Controllers\BlocoController::class, 'excluir'])->name('blocos.excluir');
+});
+
+Route::prefix('/salas')->middleware(['auth', 'authorization'])->group(function(Router $router) {
+    $router->get('/', [\App\Http\Controllers\SalaController::class, 'index'])->name('salas.listar');
+    $router->get('/cadastrar', [\App\Http\Controllers\SalaController::class, 'cadastrarSala'])->name('salas.cadastrar');
+    $router->post('/cadastrar', [\App\Http\Controllers\SalaController::class, 'cadastrarSalaPost']);
+    $router->get('/editar/{id}', [\App\Http\Controllers\SalaController::class, 'editarSala'])->name('salas.editar');
+    $router->post('/editar/{id}', [\App\Http\Controllers\SalaController::class, 'editarSalaPost']);
+    $router->post('/excluir/{id}', [\App\Http\Controllers\SalaController::class, 'excluir'])->name('salas.excluir');
+});

@@ -15,7 +15,7 @@ class EditarRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => [
+            'name' => [
                 'required',
                 Rule::unique('blocos')->ignore($this->id)
             ],
@@ -33,8 +33,8 @@ class EditarRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'nome.required' => 'O nome é obrigatório.',
-            'nome.unique' => 'O nome já está em uso.',
+            'name.required' => 'O nome é obrigatório.',
+            'name.unique' => 'O nome já está em uso.',
             'numero.required' => 'O número é obrigatório.',
             'numero.unique' => 'O número informado já está em uso.',
             'numero.integer' => 'O valor para número deve ser um inteiro.',
